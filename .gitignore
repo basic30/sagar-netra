@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ML Checkpoints & Datasets
+ml/checkpoints/*.pth
+!ml/checkpoints/best_model.pth
+ml/checkpoints/*.pt
+!ml/checkpoints/best_model_traced.pt
+data/raw/
+data/processed/
+outputs/
+
+# Environment variables
+.env
+
+# Node / React
+node_modules/
+dist/
+build/
+.DS_Store
+__MACOSX/
