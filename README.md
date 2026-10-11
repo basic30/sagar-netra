@@ -1,4 +1,4 @@
-# 🌊 Garuda — Marine Oil Spill Detection, Lagrangian Drift & Vessel Attribution System
+# 🌊 Sagar Netra — Marine Oil Spill Detection, Lagrangian Drift & Vessel Attribution System
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg?logo=pytorch&logoColor=white)](https://pytorch.org/)
@@ -29,7 +29,7 @@ An operational, end-to-end Geospatial Information System (GIS) platform for auto
 
 ## 🛡️ Executive Overview
 
-Marine oil spills represent catastrophic environmental hazards requiring rapid response and strict legal accountability. **Garuda** bridges the gap between satellite remote sensing and maritime intelligence by providing:
+Marine oil spills represent catastrophic environmental hazards requiring rapid response and strict legal accountability. **Sagar Netra** bridges the gap between satellite remote sensing and maritime intelligence by providing:
 
 1. **SAR Satellite Segmentation**: Deep learning-based extraction of slick boundaries from noise-heavy SAR backscatter images.
 2. **Geospatial Physics Modeling**: Forward trajectory forecasting (+6h to +48h) and reverse origin backcasting (-24h) using real-time atmospheric wind and surface ocean currents.
@@ -54,15 +54,15 @@ graph TD
     end
 
     %% Processing Core
-    subgraph Backend ["⚡ Garuda FastAPI Backend Engine"]
-        E[PyTorch SegFormer-B2 Model]
+    subgraph Backend ["⚡ Sagar Netra FastAPI Backend Engine"]
+        E[PyTorch U-Net Model]
         F[Shapely & PyProj GIS Engine - EPSG:3857 Projection]
         G[Lagrangian Physics Simulator - Forward & Backward Drift]
         H[Multi-Factor Suspect Vessel Ranking Engine]
     end
 
     %% Outputs & UI
-    subgraph Frontend ["🖥️ Garuda Interactive GIS Dashboard"]
+    subgraph Frontend ["🖥️ Sagar Netra Interactive GIS Dashboard"]
         I[Leaflet Map Viewport - Dynamic Vector Layers]
         J[Backward Origin Zone & Target Envelope - Auto Camera Focus]
         K[Forward Forecast Timeline - +6h to +48h Animation]
@@ -99,7 +99,7 @@ sequenceDiagram
 
     Operator->>FE: Upload SAR Image / Select Incident
     FE->>BE: POST /api/incidents/upload
-    BE->>ML: Pass Tensor -> Run SegFormer-B2 Segmentation
+    BE->>ML: Pass Tensor -> Run U-Net Segmentation
     ML-->>BE: Binary Mask & Contour Polygons
     BE->>BE: Calculate EPSG:3857 Projected Area (km²)
     BE-->>FE: Return Incident Geometry & Metadata
@@ -124,7 +124,7 @@ sequenceDiagram
 
 | Module | Technical Implementation | Key Output / Metric |
 | :--- | :--- | :--- |
-| **SAR Segmentation** | PyTorch SegFormer-B2 trained on satellite imagery | Binary masks & polygon boundaries |
+| **SAR Segmentation** | PyTorch U-Net (ResNet-34) trained on satellite imagery | Binary masks & polygon boundaries |
 | **Geodetic Calculations** | `Shapely` & `PyProj` re-projected to **EPSG:3857** | Projected spill area in square kilometers ($km^2$) |
 | **Environmental Forcing** | Real-time atmospheric wind ($u_{10m}, v_{10m}$) and ocean current ($u_{\text{curr}}, v_{\text{curr}}$) vectors | Surface transport vector field |
 | **Forward Drift Simulation** | Euler-Maruyama integration with turbulent diffusion | +6h, +12h, +24h, +48h forecast envelopes |
@@ -209,8 +209,8 @@ c:\Users\snaha\Desktop\test/
 │       └── schemas/                    # Pydantic request/response validation schemas
 ├── ml/
 │   ├── src/
-│   │   ├── train.py                    # PyTorch SegFormer-B2 training loop
-│   │   ├── model.py                    # SegFormer-B2 segmentation model
+│   │   ├── train.py                    # PyTorch U-Net training loop
+│   │   ├── model.py                    # U-Net (ResNet-34) segmentation model
 │   │   ├── inference.py                # Post-processing & contour extraction
 │   │   └── evaluate.py                 # Test set metric evaluation (IoU, Dice)
 │   └── checkpoints/                    # Model weights (best_model.pth)
@@ -280,13 +280,13 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173/` in your browser to launch the **Garuda** dashboard.
+Open `http://localhost:5173/` in your browser to launch the **Sagar Netra** dashboard.
 
 ---
 
 ## 📊 Evaluation & Benchmark Results
 
-The PyTorch SegFormer-B2 model was evaluated on the **complete, untouched test set** of satellite SAR imagery (1,211 scenes / 79,364,096 pixels) with zero batch truncation:
+The PyTorch U-Net model was evaluated on the **complete, untouched test set** of satellite SAR imagery (1,211 scenes / 79,364,096 pixels) with zero batch truncation:
 
 ### 1. Scene-Level Segmentation Performance (Macro Average across 1,211 Test Scenes)
 | Evaluation Metric | Benchmark Value | Operational Meaning |
@@ -311,7 +311,7 @@ The PyTorch SegFormer-B2 model was evaluated on the **complete, untouched test s
 | **Top Suspect Confidence** | **86.9%** | `PACIFIC EXPLORER` (Rank #1 Lagrangian Attribution) |
 
 ### 3. Training & Selection Provenance
-* **Backbone:** SegFormer-B2 (hierarchical Mix Transformer / MiT-B2 encoder) with transfer learning weights and lightweight MLP decoder.
+* **Backbone:** U-Net (with ResNet-34 encoder and transfer learning ImageNet weights).
 * **Loss Function:** Combined `BCEDiceLoss` with sample-wise spatial Dice calculation and class-imbalance weighting (`pos_weight=2.87`).
 * **Checkpoint Selection:** Checkpoint was selected strictly at **Epoch 3** based on peak validation Dice score (`0.7608`), completely independent of test-set data.
 * **Visual Overlays:** Qualitative 4-panel test predictions (SAR Image, Ground Truth, Predicted Mask, Color Overlay) are generated automatically in `results/test_predictions/`.

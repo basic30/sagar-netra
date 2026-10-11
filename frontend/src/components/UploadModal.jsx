@@ -360,7 +360,7 @@ export default function UploadModal({ isOpen, onClose, onUploadSuccess }) {
               {uploading ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Running SegFormer-B2 Inference...
+                  Running U-Net Inference...
                 </>
               ) : (
                 <>

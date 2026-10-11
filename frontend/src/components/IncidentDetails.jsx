@@ -172,7 +172,7 @@ export default function IncidentDetails({
       <div className="space-y-3 pt-2 border-t border-slate-800">
         <h4 className="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-2">
           <Eye className="w-4 h-4 text-cyan-400" />
-          SAR Satellite Imagery & SegFormer-B2 Predictions
+          SAR Satellite Imagery & U-Net Predictions
         </h4>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -191,14 +191,14 @@ export default function IncidentDetails({
 
           <div className="glass-card p-2 sm:p-2.5 rounded-xl border border-slate-800">
             <div className="text-[11px] font-mono text-slate-400 mb-2 flex items-center justify-between">
-              <span>SegFormer-B2 Prediction</span>
+              <span>U-Net Prediction</span>
               <span className="text-cyan-400 font-semibold">
                 IoU: {incident?.iou_score ? Number(incident.iou_score).toFixed(4) : '0.6580'}
               </span>
             </div>
             <img
               src={resolveImageUrl(incident?.prediction_image_url)}
-              alt="SegFormer-B2 Mask Prediction Overlay"
+              alt="U-Net Mask Prediction Overlay"
               className="w-full h-auto rounded-lg border border-slate-700/60 object-cover max-h-[260px] mx-auto"
               onError={(e) => { e.target.style.display = 'none'; }}
             />

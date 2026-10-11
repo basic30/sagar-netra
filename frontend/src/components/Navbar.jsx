@@ -11,7 +11,7 @@ export default function Navbar({ liveStatus, activeTab, setActiveTab }) {
           <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl overflow-hidden bg-white/95 border border-cyan-500/50 p-0.5 shadow-lg shadow-cyan-950/60 shrink-0 flex items-center justify-center transition-all hover:scale-105">
             <img
               src="/sagarnetra_logo.jpeg"
-              alt="Garuda Logo Emblem"
+              alt="Sagar Netra Logo Emblem"
               className="w-full h-full object-contain"
             />
           </div>
@@ -62,7 +62,7 @@ export default function Navbar({ liveStatus, activeTab, setActiveTab }) {
           <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800">
             <Cpu className="w-3.5 h-3.5 text-cyan-400" />
             <span className="text-slate-400">ML Model:</span>
-            <span className="text-emerald-400 font-semibold">SegFormer-B2</span>
+            <span className="text-emerald-400 font-semibold">U-Net</span>
           </div>
 
           {/* Live AIS Status (Desktop/Tablet) */}
