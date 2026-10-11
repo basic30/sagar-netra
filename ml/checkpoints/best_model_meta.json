@@ -1,0 +1,9 @@
+{
+  "selected_epoch": 3,
+  "selection_metric": "Validation Dice Score (Macro F1)",
+  "val_dice": 0.7607940512988601,
+  "val_iou": 0.6461493574639376,
+  "val_loss": 0.3978576987981796,
+  "encoder": "resnet34 (ImageNet pretrained)",
+  "selection_note": "Selected strictly on validation set peak Dice. Test set was NOT used for selection."
+}
