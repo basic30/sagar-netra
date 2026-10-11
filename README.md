@@ -31,7 +31,7 @@ An operational, end-to-end Geospatial Information System (GIS) platform for auto
 
 Marine oil spills represent catastrophic environmental hazards requiring rapid response and strict legal accountability. **Sagar Netra** bridges the gap between satellite remote sensing and maritime intelligence by providing:
 
-1. **SAR Satellite Segmentation**: Deep learning-based extraction of slick boundaries from noise-heavy SAR backscatter images.
+1. **SAR Satellite Segmentation**: Deep learning-based extraction of slick boundaries from noise-heavy SAR backscatter images using a PyTorch U-Net (ResNet-34) architecture.
 2. **Geospatial Physics Modeling**: Forward trajectory forecasting (+6h to +48h) and reverse origin backcasting (-24h) using real-time atmospheric wind and surface ocean currents.
 3. **Automated Vessel Ranking**: Algorithmic cross-matching of probable origin zones against live and historical Automatic Identification System (AIS) ship tracks to pinpoint suspect polluters.
 
@@ -39,7 +39,7 @@ Marine oil spills represent catastrophic environmental hazards requiring rapid r
 
 ## 🏗️ System Architecture & Dataflow
 
-The system integrates a high-performance **PyTorch ML engine**, a **FastAPI asynchronous backend**, an **AISstream WebSocket client**, and a dark-glassmorphic **React + Leaflet GIS frontend**.
+The system integrates a high-performance **PyTorch U-Net (ResNet-34) ML engine**, a **FastAPI asynchronous backend**, an **AISstream WebSocket client**, and a dark-glassmorphic **React + Leaflet GIS frontend**.
 
 ### 1. High-Level System Architecture Diagram
 
@@ -55,7 +55,7 @@ graph TD
 
     %% Processing Core
     subgraph Backend ["⚡ Sagar Netra FastAPI Backend Engine"]
-        E[PyTorch U-Net Model]
+        E[PyTorch U-Net (ResNet-34) Model]
         F[Shapely & PyProj GIS Engine - EPSG:3857 Projection]
         G[Lagrangian Physics Simulator - Forward & Backward Drift]
         H[Multi-Factor Suspect Vessel Ranking Engine]
@@ -99,7 +99,7 @@ sequenceDiagram
 
     Operator->>FE: Upload SAR Image / Select Incident
     FE->>BE: POST /api/incidents/upload
-    BE->>ML: Pass Tensor -> Run U-Net Segmentation
+    BE->>ML: Pass Tensor -> Run U-Net (ResNet-34) Segmentation
     ML-->>BE: Binary Mask & Contour Polygons
     BE->>BE: Calculate EPSG:3857 Projected Area (km²)
     BE-->>FE: Return Incident Geometry & Metadata
@@ -209,7 +209,7 @@ c:\Users\snaha\Desktop\test/
 │       └── schemas/                    # Pydantic request/response validation schemas
 ├── ml/
 │   ├── src/
-│   │   ├── train.py                    # PyTorch U-Net training loop
+│   │   ├── train.py                    # PyTorch U-Net (ResNet-34) training loop
 │   │   ├── model.py                    # U-Net (ResNet-34) segmentation model
 │   │   ├── inference.py                # Post-processing & contour extraction
 │   │   └── evaluate.py                 # Test set metric evaluation (IoU, Dice)
@@ -286,7 +286,7 @@ Open `http://localhost:5173/` in your browser to launch the **Sagar Netra** dash
 
 ## 📊 Evaluation & Benchmark Results
 
-The PyTorch U-Net model was evaluated on the **complete, untouched test set** of satellite SAR imagery (1,211 scenes / 79,364,096 pixels) with zero batch truncation:
+The PyTorch U-Net (ResNet-34) model was evaluated on the **complete, untouched test set** of satellite SAR imagery (1,211 scenes / 79,364,096 pixels) with zero batch truncation:
 
 ### 1. Scene-Level Segmentation Performance (Macro Average across 1,211 Test Scenes)
 | Evaluation Metric | Benchmark Value | Operational Meaning |
@@ -311,7 +311,7 @@ The PyTorch U-Net model was evaluated on the **complete, untouched test set** of
 | **Top Suspect Confidence** | **86.9%** | `PACIFIC EXPLORER` (Rank #1 Lagrangian Attribution) |
 
 ### 3. Training & Selection Provenance
-* **Backbone:** U-Net (with ResNet-34 encoder and transfer learning ImageNet weights).
+* **Backbone:** U-Net with ResNet-34 Encoder (ImageNet pretrained weights) and Feature Decoder.
 * **Loss Function:** Combined `BCEDiceLoss` with sample-wise spatial Dice calculation and class-imbalance weighting (`pos_weight=2.87`).
 * **Checkpoint Selection:** Checkpoint was selected strictly at **Epoch 3** based on peak validation Dice score (`0.7608`), completely independent of test-set data.
 * **Visual Overlays:** Qualitative 4-panel test predictions (SAR Image, Ground Truth, Predicted Mask, Color Overlay) are generated automatically in `results/test_predictions/`.
