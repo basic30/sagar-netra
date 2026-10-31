@@ -1,4 +1,4 @@
-# 🌊 Garuda — Marine Oil Spill Detection, Lagrangian Drift & Vessel Attribution System
+# 🌊 Sagar Netra — Marine Oil Spill Detection, Lagrangian Drift & Vessel Attribution System
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg?logo=pytorch&logoColor=white)](https://pytorch.org/)
@@ -29,7 +29,7 @@ An operational, end-to-end Geospatial Information System (GIS) platform for auto
 
 ## 🛡️ Executive Overview
 
-Marine oil spills represent catastrophic environmental hazards requiring rapid response and strict legal accountability. **Garuda** bridges the gap between satellite remote sensing and maritime intelligence by providing:
+Marine oil spills represent catastrophic environmental hazards requiring rapid response and strict legal accountability. **Sagar Netra** bridges the gap between satellite remote sensing and maritime intelligence by providing:
 
 1. **SAR Satellite Segmentation**: Deep learning-based extraction of slick boundaries from noise-heavy SAR backscatter images.
 2. **Geospatial Physics Modeling**: Forward trajectory forecasting (+6h to +48h) and reverse origin backcasting (-24h) using real-time atmospheric wind and surface ocean currents.
@@ -54,7 +54,7 @@ graph TD
     end
 
     %% Processing Core
-    subgraph Backend ["⚡ Garuda FastAPI Backend Engine"]
+    subgraph Backend ["⚡ Sagar Netra FastAPI Backend Engine"]
         E[PyTorch SegFormer-B2 Model]
         F[Shapely & PyProj GIS Engine - EPSG:3857 Projection]
         G[Lagrangian Physics Simulator - Forward & Backward Drift]
@@ -62,7 +62,7 @@ graph TD
     end
 
     %% Outputs & UI
-    subgraph Frontend ["🖥️ Garuda Interactive GIS Dashboard"]
+    subgraph Frontend ["🖥️ Sagar Netra Interactive GIS Dashboard"]
         I[Leaflet Map Viewport - Dynamic Vector Layers]
         J[Backward Origin Zone & Target Envelope - Auto Camera Focus]
         K[Forward Forecast Timeline - +6h to +48h Animation]
@@ -280,7 +280,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173/` in your browser to launch the **Garuda** dashboard.
+Open `http://localhost:5173/` in your browser to launch the **Sagar Netra** dashboard.
 
 ---
 
@@ -340,3 +340,8 @@ When hosting on free cloud platforms (e.g., Render, Koyeb, Railway) with 512MB R
 
 > [!IMPORTANT]  
 > Suspect vessel attribution scores represent probabilistic intelligence derived from spatial proximity, velocity changes, track vectors, and AIS gap anomalies. Scores are provided for decision support and monitoring guidance alongside physical sampling and maritime authority verification.
+
+---
+
+*SagarNetra — Maritime Intelligence & Oil Spill Tracking Platform.*
+

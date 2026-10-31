@@ -28,3 +28,9 @@ dist/
 build/
 .DS_Store
 __MACOSX/
+
+# Logs & IDEs
+*.log
+.vscode/
+.idea/
+
