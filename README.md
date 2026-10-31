@@ -340,3 +340,8 @@ When hosting on free cloud platforms (e.g., Render, Koyeb, Railway) with 512MB R
 
 > [!IMPORTANT]  
 > Suspect vessel attribution scores represent probabilistic intelligence derived from spatial proximity, velocity changes, track vectors, and AIS gap anomalies. Scores are provided for decision support and monitoring guidance alongside physical sampling and maritime authority verification.
+
+---
+
+*SagarNetra — Maritime Intelligence & Oil Spill Tracking Platform.*
+
